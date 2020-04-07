@@ -1,12 +1,14 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { GlobalContext } from '../../context/GlobalContext'
 import { Link } from 'react-router-dom'
+
 export const Header = () => {
+  const context = useContext(GlobalContext)
+
   return (
-    <header>
-      <nav>
-        <Link to='/'> Home</Link>
-        <Link to='/rooms'>Rooms</Link>
-      </nav>
-    </header>
+    <nav>
+      <Link to='/'> Logo</Link>{' '}
+      <Link to='/rooms'>Rooms</Link>
+    </nav>
   )
 }
