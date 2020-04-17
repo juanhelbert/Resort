@@ -1,0 +1,13 @@
+$font_color: rgba(0, 0, 0, 0.85);
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.container {
+  display: flex;
+  max-width: 1200px;
+  margin: 0 auto;
+}
