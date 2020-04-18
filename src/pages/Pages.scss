@@ -1,0 +1,62 @@
+// ____ Home ____
+.home-page {
+  .featured {
+    display: grid;
+    width: 100%;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 20px;
+    @media only screen and (max-width: 991px) {
+      display: flex;
+      flex-wrap: nowrap;
+      overflow: auto;
+      padding-bottom: 12px;
+      a {
+        min-width: 28%;
+        margin-right: 2%;
+      }
+    }
+    @media only screen and (max-width: 768px) {
+      a {
+        min-width: 40%;
+        margin-right: 3%;
+      }
+    }
+    @media only screen and (max-width: 576px) {
+      a {
+        min-width: 75%;
+        margin-right: 5%;
+      }
+    }
+  }
+}
+
+// ____ Rooms ____
+.rooms-page {
+  .filters {
+    padding: 20px 0;
+  }
+  .wrapper {
+    margin: 0 10px;
+    &.slider {
+      display: flex;
+      align-items: center;
+      .min {
+        margin-right: 5px;
+      }
+      .max {
+        margin-left: 5px;
+      }
+    }
+    &.switch {
+      label {
+        cursor: pointer;
+        padding-left: 5px;
+      }
+    }
+  }
+  .filtered-rooms {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 15px;
+  }
+}

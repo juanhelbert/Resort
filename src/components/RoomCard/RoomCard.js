@@ -13,18 +13,16 @@ export const RoomCard = props => {
   const bg_img = images[0].fields.file.url
 
   return (
-    <Link to={`/rooms/${slug}`} >
-      <article className='room-card' style={{ backgroundImage: `url(${bg_img})` }}>
-        <span className='overlay' />
-        <div className='content'>
-          <b className='name'>{name}</b>
-          <div className='services'>
-            <span className='capacity'>{icons.capacity} {capacity}</span>
-            {pets && <span className='pets'>{icons.pets}</span>}
-            {breakfast && <span className='breakfast'>{icons.breakfast}</span>}
-          </div>
+    <Link to={`/rooms/${slug}`} className='room-card' style={{ backgroundImage: `url(${bg_img})` }}>
+      <span className='overlay' />
+      <div className='content'>
+        <b className='name'>{name}</b>
+        <div className='services'>
+          <span className='capacity'>{icons.capacity} {capacity}</span>
+          {pets && <span className='pets'>{icons.pets}</span>}
+          {breakfast && <span className='breakfast'>{icons.breakfast}</span>}
         </div>
-      </article>
+      </div>
     </Link>
   )
 }

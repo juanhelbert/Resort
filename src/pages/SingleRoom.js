@@ -8,11 +8,13 @@ export const SingleRoom = props => {
   const actualRoom = rooms && rooms.find(room => room.slug === slug)
   const { name, type, price, size, capacity, description, pets, breakfast, extras, images } = actualRoom || ''
   return (
-    actualRoom ? (
-      <div>
-        {name}{price}{type}{size}{capacity}{description}
-      </div>
+    <div className='container'>
+      {actualRoom ? (
+        <div>
+          {name}{price}{type}{size}{capacity}{description}
+        </div>
 
-    ) : 'L O A D I N G . . . '
+      ) : 'L O A D I N G . . . '}
+    </div>
   )
 }

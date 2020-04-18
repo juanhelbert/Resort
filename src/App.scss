@@ -10,4 +10,33 @@ $font_color: rgba(0, 0, 0, 0.85);
   display: flex;
   max-width: 1200px;
   margin: 0 auto;
+  padding: 0 15px;
+}
+
+.flex {
+  display: flex;
+}
+
+.center {
+  justify-content: center;
+  align-items: center;
+}
+
+.w-100 {
+  width: 100%;
+}
+
+.wrap {
+  flex-wrap: wrap;
+}
+
+.navbar {
+  padding: 8px 0;
+  background-color: #1890ff;
+}
+
+@media only screen and (max-width: 991px) {
+  .navbar .container {
+    justify-content: flex-end;
+  }
 }

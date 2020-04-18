@@ -13,9 +13,9 @@ export const Header = () => {
   }
 
   return (
-    <div>
+    <div className='navbar'>
       <div className='container'>
-        <Button type="primary" onClick={() => showDrawer()}>
+        <Button type="default" onClick={() => showDrawer()} style={{ border: 'none' }}>
           <MenuOutlined />
         </Button>
       </div>

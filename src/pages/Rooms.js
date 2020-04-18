@@ -1,8 +1,12 @@
 import React, { useContext, useState, useEffect } from 'react'
 import { RoomCard } from '../components/RoomCard/RoomCard'
 import { GlobalContext } from '../context/GlobalContext'
+import './Pages.scss'
+
+import { Select, Input, Slider, Switch } from 'antd';
 
 export const Rooms = () => {
+  const { Option } = Select;
   const { data } = useContext(GlobalContext)
   const rooms = data && data.rooms && data.rooms.items.map(i => i.fields)
   const prices = (rooms && rooms.map(r => r.price)) || []
@@ -13,12 +17,14 @@ export const Rooms = () => {
   const [value, setValue] = useState()
   const [search, setSearch] = useState('')
   const [pets, setPets] = useState(false)
+  const [breakfast, setBreakfast] = useState(false)
   const [type, setType] = useState('all')
 
   const filteredRooms = rooms && rooms.filter(room =>
     room.price <= value
     && room.name.toLocaleLowerCase().includes(search.toLocaleLowerCase().trim())
     && (pets === false ? room : room.pets === true)
+    && (breakfast === false ? room : room.breakfast === true)
     && (type === 'all' ? room : room.type === type)
   )
 
@@ -26,41 +32,66 @@ export const Rooms = () => {
     setValue(maxPrice)
   }, [data])
 
+
   return (
-    data && data.rooms && data.rooms.items ? (
-      <>
-        <section className='filters'>
-          <select value={type} onChange={e => setType(e.target.value)}>
-            <option value='all'>all</option>
-            {roomTypes.map(type => <option key={type} value={type}>{type}</option>)}
-          </select>
-          <input value={search} onChange={e => setSearch(e.target.value)} />
-          <div className='range'>
-            {minPrice}
-            <input
-              onChange={(e) => setValue(e.target.value)}
-              type="range"
-              min={minPrice}
-              max={maxPrice}
-              value={value}
-              step="1"
+    <div className='container wrap rooms-page'>
+      {data && data.rooms && data.rooms.items ? (
+        <>
+          <section className='filters w-100 flex wrap center'>
+            <Select
+              className='wrapper'
+              value={type}
+              onChange={e => setType(e)}
+              defaultValue="all" style={{ width: 120 }}
+            >
+              <Option value="all">all</Option>
+              {roomTypes.map(type => <Option key={type} value={type}>{type}</Option>)}
+            </Select>
+            <Input
+              className='wrapper'
+              placeholder="Single economy"
+              value={search}
+              onChange={e => setSearch(e.target.value)}
+              style={{ width: 200 }}
             />
-            {maxPrice} <h1>{value}</h1>
-          </div>
-          <div className='checks'>
-            <input type='checkbox' checked={pets} onChange={() => setPets(!pets)} id='pets' /><label htmlFor='pets'>Pets</label>
-          </div>
-        </section>
+            <div className='wrapper slider'>
+              <span className='min'>${minPrice}</span>
+              <Slider
+                min={minPrice}
+                max={maxPrice}
+                style={{ width: 200 }}
+                defaultValue={maxPrice}
+                onChange={(e) => setValue(e)}
+              />
+              <span className='max'>${maxPrice}</span>
+            </div>
+            <div className='wrapper switch'>
+              <Switch
+                onChange={() => setPets(!pets)}
+                size='small' id='pets'
+              />
+              <label htmlFor='pets'>Pets</label>
+            </div>
+            <div className='wrapper switch'>
+              <Switch
+                onChange={() => setBreakfast(!breakfast)}
+                size='small' id='breakfast'
+              />
+              <label htmlFor='breakfast'>Breakfast</label>
+            </div>
+          </section>
 
-        <section className='filtered-rooms'>
-          {filteredRooms && filteredRooms.length
-            ? filteredRooms && filteredRooms.map(item => (
-              <RoomCard key={item.slug} {...item} />
-            ))
-            : <h2>Ningun elemento coincide con la busqueda :(</h2>}
-        </section>
+          <section className='filtered-rooms w-100'>
+            {filteredRooms && filteredRooms.length
+              ? filteredRooms && filteredRooms.map(item => (
+                <RoomCard key={item.slug} {...item} />
+              ))
+              : <h2>Ningun elemento coincide con la busqueda :(</h2>}
+          </section>
 
-      </>
-    ) : <h1>L O A D I N G . . . </h1>
+        </>
+      ) : <h1>L O A D I N G . . . </h1>
+      }
+    </div>
   )
 }
